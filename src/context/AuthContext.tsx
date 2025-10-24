@@ -45,10 +45,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         localStorage.setItem('token', response.token);
         localStorage.setItem('user', JSON.stringify(response.user));
       } else {
-        throw new Error(response.message || '로그인에 실패했습니다');
+        throw new Error(response.message || 'ログインに失敗しました');
       }
     } catch (error: any) {
-      throw new Error(error.response?.data?.message || '로그인에 실패했습니다');
+      throw new Error(error.response?.data?.message || 'ログインに失敗しました');
     }
   };
 
@@ -62,10 +62,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         localStorage.setItem('token', response.token);
         localStorage.setItem('user', JSON.stringify(response.user));
       } else {
-        throw new Error(response.message || '회원가입에 실패했습니다');
+        throw new Error(response.message || '会員登録に失敗しました');
       }
     } catch (error: any) {
-      throw new Error(error.response?.data?.message || '회원가입에 실패했습니다');
+      throw new Error(error.response?.data?.message || '会員登録に失敗しました');
     }
   };
 
