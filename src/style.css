@@ -1,0 +1,396 @@
+/*
+ * =======================================
+ * 오토나바 - 완벽한 반응형 스타일시트
+ * PC, 태블릿, 스마트폰 모두 지원
+ * =======================================
+ */
+
+/* ===== 0. 글로벌 리셋 ===== */
+/* ===== 0. 글로벌 리셋 수정 ===== */
+/* styles.css 또는 App.css 맨 위에 추가 */
+
+
+/* styles.css 맨 위에 추가 */
+html, body, #root {
+  height: 100%;
+  width: 100%; /* 반드시 추가 */
+  margin: 0;
+  padding: 0;
+}
+
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  padding: 16px;
+  width: 100%; /* 반드시 추가 */
+}
+
+
+
+body {
+  background-color: #f5f5f5;
+  color: #333;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ===== 1. 공통 컨테이너 (로그인/회원가입) ===== */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 여기서 중앙 정렬을 시도 */
+  background-color: #f5f5f5;
+  padding: 16px;
+}
+
+.auth-card {
+  background-color: white;
+  padding: clamp(24px, 5vw, 40px);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 450px;
+}
+
+.auth-title {
+  font-size: clamp(24px, 5vw, 28px);
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.auth-subtitle {
+  font-size: clamp(13px, 3vw, 14px);
+  color: #666;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.auth-error {
+  background-color: #fee;
+  color: #c33;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: clamp(13px, 3vw, 14px);
+}
+
+/* ===== 2. 폼 스타일 ===== */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-label {
+  font-size: clamp(13px, 3vw, 14px);
+  font-weight: 600;
+  color: #333;
+}
+
+.input-field {
+  padding: 14px 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s;
+  min-height: 48px;
+  width: 100%;
+  font-family: inherit;
+}
+
+.input-field:focus {
+  border-color: #4a90e2;
+}
+
+.input-field:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.select-field {
+  padding: 14px 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+  background-color: white;
+  cursor: pointer;
+  color: #333;
+  min-height: 48px;
+  width: 100%;
+  font-family: inherit;
+}
+
+.select-field:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.select-option {
+  color: #333;
+  background-color: white;
+  padding: 10px;
+}
+
+/* ===== 3. 버튼 스타일 ===== */
+.btn-primary {
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background-color: #4a90e2;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.2s;
+  min-height: 52px;
+  width: 100%;
+  touch-action: manipulation;
+  font-family: inherit;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #3a7bd5;
+}
+
+.btn-primary:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.btn-logout {
+  padding: clamp(8px, 2vw, 10px) clamp(12px, 3vw, 16px);
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: clamp(13px, 3vw, 14px);
+  font-weight: 600;
+  min-height: 40px;
+  touch-action: manipulation;
+  font-family: inherit;
+}
+
+.btn-logout:hover {
+  background-color: #dd2222;
+}
+
+.btn-feature {
+  padding: clamp(10px, 2vw, 12px) clamp(16px, 3vw, 20px);
+  background-color: #e0e0e0;
+  color: #666;
+  border: none;
+  border-radius: 6px;
+  cursor: not-allowed;
+  font-size: clamp(13px, 3vw, 14px);
+  font-weight: 600;
+  min-height: 44px;
+  font-family: inherit;
+}
+
+/* ===== 4. 푸터 및 링크 ===== */
+.auth-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: clamp(13px, 3vw, 14px);
+  color: #666;
+}
+
+.auth-link {
+  color: #4a90e2;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 4px;
+  display: inline-block;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+/* ===== 5. 홈 페이지 스타일 ===== */
+.home-container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.home-header {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 24px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.home-logo {
+  font-size: clamp(20px, 4vw, 24px);
+  font-weight: bold;
+  color: #4a90e2;
+  margin: 0;
+}
+
+.home-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(20px, 4vw, 40px) clamp(16px, 4vw, 20px);
+}
+
+/* ===== 6. 환영 카드 ===== */
+.welcome-card {
+  background-color: white;
+  padding: clamp(24px, 5vw, 40px);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: clamp(20px, 4vw, 30px);
+}
+
+.welcome-title {
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16px;
+  word-break: break-word;
+}
+
+.welcome-text {
+  font-size: clamp(14px, 3vw, 16px);
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 2vw, 12px);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-weight: 600;
+  color: #555;
+  font-size: clamp(13px, 3vw, 14px);
+}
+
+.info-value {
+  color: #333;
+  font-size: clamp(14px, 3vw, 16px);
+  word-break: break-all;
+}
+
+/* ===== 7. 기능 카드 그리드 ===== */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: clamp(16px, 3vw, 24px);
+  margin-bottom: clamp(20px, 4vw, 30px);
+}
+
+.feature-card {
+  background-color: white;
+  padding: clamp(24px, 5vw, 30px);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.feature-icon {
+  font-size: clamp(40px, 8vw, 48px);
+  margin-bottom: 16px;
+}
+
+.feature-title {
+  font-size: clamp(18px, 4vw, 20px);
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.feature-text {
+  font-size: clamp(13px, 3vw, 14px);
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  flex: 1;
+}
+
+/* ===== 8. 상태 카드 ===== */
+.status-card {
+  background-color: white;
+  padding: clamp(24px, 5vw, 30px);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.status-title {
+  font-size: clamp(18px, 4vw, 20px);
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.status-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 2vw, 12px);
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: clamp(14px, 3vw, 16px);
+  color: #555;
+}
+
+.status-check {
+  font-size: clamp(18px, 4vw, 20px);
+  flex-shrink: 0;
+}
+
+/* ===== 9. 반응형 미디어 쿼리 ===== */
+@media (max-width: 600px) {
+  .auth-container {
+    padding: 12px;
+  }
+  
+  .auth-card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .home-content {
+    padding: 16px 12px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
