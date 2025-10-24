@@ -6,7 +6,7 @@ import { useAuth } from '../context/AuthContext';
 const SendMessage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
   
   // URL에서 받는 사람 정보 가져오기
   const receiverData = location.state as { receiverId: string; receiverNickname: string } | null;

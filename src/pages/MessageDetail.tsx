@@ -109,7 +109,7 @@ const MessageDetailPage: React.FC = () => {
   if (!message) return null;
 
   const isReceiver = user?.id === message.receiver_id;
-  const isSender = user?.id === message.sender_id;
+  // const isSender = user?.id === message.sender_id;
 
   return (
     <div className="home-container">

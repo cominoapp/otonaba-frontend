@@ -41,7 +41,12 @@ const PostWrite: React.FC = () => {
       setTitle(data.title);
       setContent(data.content);
       setCategory(data.category);
-      setImages(data.images || []);
+      if (data.images) {
+  setImages(data.images.map(img => ({
+    url: img.image_url,
+    cloudinary_id: img.cloudinary_id
+  })));
+}
     } catch (error) {
       console.error('投稿の読み込みに失敗しました:', error);
       alert('投稿が見つかりません');
