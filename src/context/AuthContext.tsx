@@ -40,21 +40,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const login = async (email: string, password: string) => {
-    try {
-      const response = await loginApi({ email, password });
-      
-      if (response.success) {
-        setToken(response.token);
-        setUser(response.user);
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('user', JSON.stringify(response.user));
-      } else {
-        throw new Error(response.message || 'ログインに失敗しました');
-      }
-    } catch (error: any) {
-      throw new Error(error.response?.data?.message || 'ログインに失敗しました');
+  try {
+    const response = await loginApi({ email, password });
+    
+    if (response.success) {
+      setToken(response.token);
+      setUser(response.user);
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('user', JSON.stringify(response.user));
+      return; // 성공 시 정상 종료
+    } else {
+      throw new Error(response.message || 'ログインに失敗しました');
     }
-  };
+  } catch (error: any) {
+    console.error('Login error:', error); // 디버깅용
+    // 에러 메시지를 더 명확하게
+    const errorMessage = error.response?.data?.message || error.message || 'ログインに失敗しました';
+    throw new Error(errorMessage);
+  }
+};
 
   const register = async (email: string, password: string, nickname: string, age_group: string) => {
     try {
