@@ -70,34 +70,61 @@ const Posts: React.FC = () => {
   return (
     <div className="home-container">
       <div className="home-header">
-        <h1 className="home-logo">オトナバ</h1>
+        <h1 className="home-logo">
+          <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
+            オトナバ
+          </Link>
+        </h1>
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-  <Link to="/" style={{ color: '#4a90e2', textDecoration: 'none', fontWeight: '600' }}>
-    ホーム
-  </Link>
-  <Link to="/profile" style={{ color: '#4a90e2', textDecoration: 'none', fontWeight: '600' }}>
-    プロフィール
-  </Link>
-  <NotificationBell />
-  <span style={{ color: '#666' }}>{user?.nickname}さん</span>
-  <button onClick={() => { logout(); navigate('/login'); }} className="btn-logout">
-    ログアウト
-  </button>
-</div>
+          {user ? (
+            <>
+              <Link to="/" style={{ color: '#4a90e2', textDecoration: 'none', fontWeight: '600' }}>
+                ホーム
+              </Link>
+              <Link to="/profile" style={{ color: '#4a90e2', textDecoration: 'none', fontWeight: '600' }}>
+                プロフィール
+              </Link>
+              <NotificationBell />
+              <span style={{ color: '#666' }}>{user.nickname}さん</span>
+              <button onClick={() => { logout(); navigate('/login'); }} className="btn-logout">
+                ログアウト
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/register" className="btn-primary" style={{ padding: '8px 20px', textDecoration: 'none' }}>
+                会員登録
+              </Link>
+              <Link to="/login" className="btn-secondary" style={{ padding: '8px 20px', textDecoration: 'none' }}>
+                ログイン
+              </Link>
+            </>
+          )}
+        </div>
       </div>
 
       <div className="home-content">
         <div className="welcome-card">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
             <h2 style={{ fontSize: '24px', fontWeight: 'bold', margin: 0 }}>掲示板</h2>
-            <Link to="/posts/write">
-              <button className="btn-primary" style={{ width: 'auto', padding: '12px 24px' }}>
-                新規投稿
+            {user ? (
+              <Link to="/posts/write">
+                <button className="btn-primary" style={{ width: 'auto', padding: '12px 24px' }}>
+                  新規投稿
+                </button>
+              </Link>
+            ) : (
+              <button 
+                onClick={() => navigate('/login')} 
+                className="btn-primary"
+                style={{ width: 'auto', padding: '12px 24px' }}
+              >
+                ログインして投稿
               </button>
-            </Link>
+            )}
           </div>
 
-          {/* 검색창 */}
+          {/* 検索フォーム */}
           <form onSubmit={handleSearch} style={{ marginBottom: '20px' }}>
             <div style={{ display: 'flex', gap: '10px' }}>
               <input
@@ -155,7 +182,7 @@ const Posts: React.FC = () => {
             )}
           </form>
 
-          {/* 카테고리 필터 */}
+          {/* カテゴリーフィルター */}
           <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap' }}>
             <button
               onClick={() => handleCategoryChange('')}
@@ -192,7 +219,7 @@ const Posts: React.FC = () => {
             ))}
           </div>
 
-          {/* 게시글 목록 */}
+          {/* 投稿リスト */}
           {loading ? (
             <div style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
               読み込み中...
@@ -234,27 +261,29 @@ const Posts: React.FC = () => {
                           {post.category}
                         </span>
                       </div>
-                   <p style={{ color: '#666', fontSize: '14px', margin: '8px 0', lineHeight: '1.5' }}>
-  {post.content.substring(0, 100)}...
-</p>
+                      
+                      <p style={{ color: '#666', fontSize: '14px', margin: '8px 0', lineHeight: '1.5' }}>
+                        {post.content.substring(0, 100)}...
+                      </p>
 
-{/* 썸네일 이미지 */}
-{post.images && post.images.length > 0 && (
-  <div style={{ marginTop: '12px' }}>
-    <img
-      src={post.images[0].image_url}
-      alt="thumbnail"
-      style={{
-        width: '100%',
-        height: '200px',
-        objectFit: 'cover',
-        borderRadius: '8px',
-        border: '1px solid #e0e0e0'
-      }}
-    />
-  </div>
-)}
-                      <div style={{ display: 'flex', gap: '16px', fontSize: '13px', color: '#999' }}>
+                      {/* サムネイル画像 */}
+                      {post.images && post.images.length > 0 && (
+                        <div style={{ marginTop: '12px' }}>
+                          <img
+                            src={post.images[0].image_url}
+                            alt="thumbnail"
+                            style={{
+                              width: '100%',
+                              height: '200px',
+                              objectFit: 'cover',
+                              borderRadius: '8px',
+                              border: '1px solid #e0e0e0'
+                            }}
+                          />
+                        </div>
+                      )}
+                      
+                      <div style={{ display: 'flex', gap: '16px', fontSize: '13px', color: '#999', marginTop: '12px' }}>
                         <span>
                           👤 
                           <Link 
@@ -280,7 +309,7 @@ const Posts: React.FC = () => {
                 ))}
               </div>
 
-              {/* 페이지네이션 */}
+              {/* ページネーション */}
               {totalPages > 1 && (
                 <div style={{
                   display: 'flex',
