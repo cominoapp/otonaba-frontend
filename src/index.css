@@ -66,3 +66,39 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+/* モバイル対応 */
+@media (max-width: 768px) {
+  .home-header {
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px 10px;
+  }
+  
+  .home-header > div {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .btn-primary,
+  .btn-secondary,
+  .btn-logout {
+    white-space: nowrap !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .welcome-card {
+    padding: 15px;
+  }
+}
+
+/* ボタン共通スタイル */
+button,
+.btn-primary,
+.btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}

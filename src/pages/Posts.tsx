@@ -16,9 +16,11 @@ const Posts: React.FC = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  const categories = ['一般', '趣味', '健康', '旅行', 'グルメ',
-  '日常', '雑談', '悩み', '自己紹介', '友達募集',
-  'ペット', 'お金', '地元交流', '人生相談', '愚痴'];
+  const categories = [
+    '一般', '趣味', '健康', '旅行', 'グルメ',
+    '日常', '雑談', '悩み', '自己紹介', '友達募集',
+    'ペット', 'お金', '地元交流', '人生相談', '愚痴'
+  ];
 
   useEffect(() => {
     loadPosts();
@@ -77,27 +79,41 @@ const Posts: React.FC = () => {
             オトナバ
           </Link>
         </h1>
-        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
           {user ? (
             <>
-              <Link to="/" style={{ color: '#4a90e2', textDecoration: 'none', fontWeight: '600' }}>
+              <Link to="/" style={{ color: '#4a90e2', textDecoration: 'none', fontWeight: '600', whiteSpace: 'nowrap' }}>
                 ホーム
               </Link>
-              <Link to="/profile" style={{ color: '#4a90e2', textDecoration: 'none', fontWeight: '600' }}>
+              <Link to="/profile" style={{ color: '#4a90e2', textDecoration: 'none', fontWeight: '600', whiteSpace: 'nowrap' }}>
                 プロフィール
               </Link>
               <NotificationBell />
-              <span style={{ color: '#666' }}>{user.nickname}さん</span>
-              <button onClick={() => { logout(); navigate('/login'); }} className="btn-logout">
+              <span style={{ color: '#666', whiteSpace: 'nowrap' }}>{user.nickname}さん</span>
+              <button onClick={() => { logout(); navigate('/login'); }} className="btn-logout" style={{ whiteSpace: 'nowrap' }}>
                 ログアウト
               </button>
             </>
           ) : (
             <>
-              <Link to="/register" className="btn-primary" style={{ padding: '8px 20px', textDecoration: 'none' }}>
+              <Link to="/register" className="btn-primary" style={{ 
+                padding: '8px 20px', 
+                textDecoration: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                whiteSpace: 'nowrap'
+              }}>
                 会員登録
               </Link>
-              <Link to="/login" className="btn-secondary" style={{ padding: '8px 20px', textDecoration: 'none' }}>
+              <Link to="/login" className="btn-secondary" style={{ 
+                padding: '8px 20px', 
+                textDecoration: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                whiteSpace: 'nowrap'
+              }}>
                 ログイン
               </Link>
             </>
@@ -107,11 +123,18 @@ const Posts: React.FC = () => {
 
       <div className="home-content">
         <div className="welcome-card">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '10px' }}>
             <h2 style={{ fontSize: '24px', fontWeight: 'bold', margin: 0 }}>掲示板</h2>
             {user ? (
               <Link to="/posts/write">
-                <button className="btn-primary" style={{ width: 'auto', padding: '12px 24px' }}>
+                <button className="btn-primary" style={{ 
+                  width: 'auto', 
+                  padding: '12px 24px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  whiteSpace: 'nowrap'
+                }}>
                   新規投稿
                 </button>
               </Link>
@@ -119,7 +142,14 @@ const Posts: React.FC = () => {
               <button 
                 onClick={() => navigate('/login')} 
                 className="btn-primary"
-                style={{ width: 'auto', padding: '12px 24px' }}
+                style={{ 
+                  width: 'auto', 
+                  padding: '12px 24px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  whiteSpace: 'nowrap'
+                }}
               >
                 ログインして投稿
               </button>
@@ -128,7 +158,7 @@ const Posts: React.FC = () => {
 
           {/* 検索フォーム */}
           <form onSubmit={handleSearch} style={{ marginBottom: '20px' }}>
-            <div style={{ display: 'flex', gap: '10px' }}>
+            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
               <input
                 type="text"
                 value={searchInput}
@@ -136,6 +166,7 @@ const Posts: React.FC = () => {
                 placeholder="🔍 タイトルまたは内容で検索..."
                 style={{
                   flex: 1,
+                  minWidth: '200px',
                   padding: '12px 16px',
                   fontSize: '14px',
                   border: '1px solid #ddd',
@@ -153,7 +184,8 @@ const Posts: React.FC = () => {
                   borderRadius: '6px',
                   cursor: 'pointer',
                   fontSize: '14px',
-                  fontWeight: '600'
+                  fontWeight: '600',
+                  whiteSpace: 'nowrap'
                 }}
               >
                 検索
@@ -170,7 +202,8 @@ const Posts: React.FC = () => {
                     borderRadius: '6px',
                     cursor: 'pointer',
                     fontSize: '14px',
-                    fontWeight: '600'
+                    fontWeight: '600',
+                    whiteSpace: 'nowrap'
                   }}
                 >
                   クリア
@@ -185,7 +218,13 @@ const Posts: React.FC = () => {
           </form>
 
           {/* カテゴリーフィルター */}
-          <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap' }}>
+          <div style={{ 
+            display: 'flex', 
+            gap: '8px', 
+            marginBottom: '20px', 
+            flexWrap: 'wrap',
+            justifyContent: 'flex-start'
+          }}>
             <button
               onClick={() => handleCategoryChange('')}
               style={{
@@ -196,7 +235,12 @@ const Posts: React.FC = () => {
                 color: category === '' ? 'white' : '#666',
                 cursor: 'pointer',
                 fontSize: '14px',
-                fontWeight: '600'
+                fontWeight: '600',
+                whiteSpace: 'nowrap',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minWidth: 'fit-content'
               }}
             >
               全て
@@ -213,7 +257,12 @@ const Posts: React.FC = () => {
                   color: category === cat ? 'white' : '#666',
                   cursor: 'pointer',
                   fontSize: '14px',
-                  fontWeight: '600'
+                  fontWeight: '600',
+                  whiteSpace: 'nowrap',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  minWidth: 'fit-content'
                 }}
               >
                 {cat}
@@ -250,11 +299,11 @@ const Posts: React.FC = () => {
                     onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#f9f9f9'}
                     onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'white'}
                     >
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '8px' }}>
-                        <h3 style={{ fontSize: '18px', fontWeight: 'bold', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          {post.title}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '8px', gap: '10px', flexWrap: 'wrap' }}>
+                        <h3 style={{ fontSize: '18px', fontWeight: 'bold', margin: 0, display: 'flex', alignItems: 'center', gap: '8px', flex: 1, minWidth: '0' }}>
+                          <span style={{ wordBreak: 'break-word' }}>{post.title}</span>
                           {post.images && post.images.length > 0 && (
-                            <span style={{ fontSize: '16px' }}>📷</span>
+                            <span style={{ fontSize: '16px', flexShrink: 0 }}>📷</span>
                           )}
                         </h3>
                         <span style={{
@@ -263,38 +312,43 @@ const Posts: React.FC = () => {
                           color: '#4a90e2',
                           borderRadius: '12px',
                           fontSize: '12px',
-                          fontWeight: '600'
+                          fontWeight: '600',
+                          whiteSpace: 'nowrap',
+                          flexShrink: 0
                         }}>
                           {post.category}
                         </span>
                       </div>
                       
-                      <p style={{ color: '#666', fontSize: '14px', margin: '8px 0', lineHeight: '1.5' }}>
+                      <p style={{ color: '#666', fontSize: '14px', margin: '8px 0', lineHeight: '1.5', wordBreak: 'break-word' }}>
                         {post.content.substring(0, 100)}...
                       </p>
                       
-                      <div style={{ display: 'flex', gap: '16px', fontSize: '13px', color: '#999', marginTop: '12px' }}>
-                        <span>
-                          {post.author_gender === '男性' ? '👨' : post.author_gender === '女性' ? '👩' : '👤'}{' '}
+                      <div style={{ display: 'flex', gap: '8px', fontSize: '13px', color: '#999', marginTop: '12px', flexWrap: 'wrap' }}>
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                          <span>{post.author_gender === '男性' ? '👨' : post.author_gender === '女性' ? '👩' : '👤'}</span>
                           <Link 
                             to={`/users/${post.author_nickname}`}
                             onClick={(e) => e.stopPropagation()}
                             style={{ 
                               color: post.author_gender === '女性' ? '#FF3399' : '#4a90e2',
                               textDecoration: 'none',
-                              fontWeight: '600'
+                              fontWeight: '600',
+                              whiteSpace: 'nowrap'
                             }}
                           >
                             {post.author_nickname}
                           </Link>
-                          {' '}({post.author_age_group}
-                          {post.author_gender && `・${post.author_gender}`}
-                          {post.author_region && `・${post.author_region}`})
+                          <span style={{ whiteSpace: 'nowrap' }}>
+                            ({post.author_age_group}
+                            {post.author_gender && `・${post.author_gender}`}
+                            {post.author_region && `・${post.author_region}`})
+                          </span>
                         </span>
-                        <span>💬 {post.comment_count || 0}</span>
-                        <span>❤️ {post.like_count || 0}</span>
-                        <span>👁 {post.views}</span>
-                        <span>📅 {formatDate(post.created_at)}</span>
+                        <span style={{ whiteSpace: 'nowrap' }}>💬 {post.comment_count || 0}</span>
+                        <span style={{ whiteSpace: 'nowrap' }}>❤️ {post.like_count || 0}</span>
+                        <span style={{ whiteSpace: 'nowrap' }}>👁 {post.views}</span>
+                        <span style={{ whiteSpace: 'nowrap' }}>📅 {formatDate(post.created_at)}</span>
                       </div>
                     </div>
                   </Link>
@@ -322,7 +376,8 @@ const Posts: React.FC = () => {
                       color: currentPage === 1 ? '#999' : '#333',
                       cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
                       fontSize: '14px',
-                      fontWeight: '600'
+                      fontWeight: '600',
+                      whiteSpace: 'nowrap'
                     }}
                   >
                     ← 前へ
@@ -341,7 +396,8 @@ const Posts: React.FC = () => {
                         cursor: 'pointer',
                         fontSize: '14px',
                         fontWeight: '600',
-                        minWidth: '40px'
+                        minWidth: '40px',
+                        whiteSpace: 'nowrap'
                       }}
                     >
                       {page}
@@ -359,7 +415,8 @@ const Posts: React.FC = () => {
                       color: currentPage === totalPages ? '#999' : '#333',
                       cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
                       fontSize: '14px',
-                      fontWeight: '600'
+                      fontWeight: '600',
+                      whiteSpace: 'nowrap'
                     }}
                   >
                     次へ →
