@@ -65,7 +65,7 @@ const loadMyPosts = async () => {
   try {
     if (!user) return;
     const data = await getPosts();
-    const myPosts = data.filter(post => post.author_id === user.id);
+    const myPosts = data.posts.filter((post: Post) => post.user_id === user.id);
     setPosts(myPosts);
   } catch (error) {
     console.error('投稿の読み込みに失敗しました:', error);
