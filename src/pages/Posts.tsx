@@ -59,7 +59,7 @@ const Posts: React.FC = () => {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('ja-JP', {
-      year: 'numeric',
+      year: '2-digit',
       month: '2-digit',
       day: '2-digit',
       hour: '2-digit',
@@ -249,7 +249,12 @@ const Posts: React.FC = () => {
                     onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'white'}
                     >
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '8px' }}>
-                        <h3 style={{ fontSize: '18px', fontWeight: 'bold', margin: 0 }}>{post.title}</h3>
+                        <h3 style={{ fontSize: '18px', fontWeight: 'bold', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          {post.title}
+                          {post.images && post.images.length > 0 && (
+                            <span style={{ fontSize: '16px' }}>📷</span>
+                          )}
+                        </h3>
                         <span style={{
                           padding: '4px 12px',
                           backgroundColor: '#e8f4f8',
@@ -265,8 +270,6 @@ const Posts: React.FC = () => {
                       <p style={{ color: '#666', fontSize: '14px', margin: '8px 0', lineHeight: '1.5' }}>
                         {post.content.substring(0, 100)}...
                       </p>
-
-                      
                       
                       <div style={{ display: 'flex', gap: '16px', fontSize: '13px', color: '#999', marginTop: '12px' }}>
                         <span>
@@ -275,7 +278,7 @@ const Posts: React.FC = () => {
                             to={`/users/${post.author_nickname}`}
                             onClick={(e) => e.stopPropagation()}
                             style={{ 
-                              color: '#4a90e2', 
+                              color: post.author_gender === '女性' ? '#FF3399' : '#4a90e2',
                               textDecoration: 'none',
                               fontWeight: '600'
                             }}
