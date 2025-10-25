@@ -266,22 +266,7 @@ const Posts: React.FC = () => {
                         {post.content.substring(0, 100)}...
                       </p>
 
-                      {/* サムネイル画像 */}
-                      //{post.images && post.images.length > 0 && (
-                      //  <div style={{ marginTop: '12px' }}>
-                      //    <img
-                      //      src={post.images[0].image_url}
-                      //      alt="thumbnail"
-                      //      style={{
-                      //        width: '100%',
-                      //        height: '200px',
-                      //        objectFit: 'cover',
-                      //        borderRadius: '8px',
-                      //        border: '1px solid #e0e0e0'
-                      //      }}
-                      //    />
-                      //  </div>
-                      //)}
+                      
                       
                       <div style={{ display: 'flex', gap: '16px', fontSize: '13px', color: '#999', marginTop: '12px' }}>
                         <span>
