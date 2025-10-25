@@ -456,17 +456,23 @@ const loadMyPosts = async () => {
                         cursor: 'pointer'
                       }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '8px' }}>
-                          <h3 style={{ fontSize: '18px', fontWeight: 'bold', margin: 0 }}>{post.title}</h3>
-                          <span style={{
-                            padding: '4px 12px',
-                            backgroundColor: '#e8f4f8',
-                            color: '#4a90e2',
-                            borderRadius: '12px',
-                            fontSize: '12px'
-                          }}>
-                            {post.category}
-                          </span>
-                        </div>
+  <h3 style={{ fontSize: '18px', fontWeight: 'bold', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
+    {post.title}
+    {post.images && post.images.length > 0 && (
+      <span style={{ fontSize: '16px' }}>📷</span>
+    )}
+  </h3>
+  <span style={{
+    padding: '4px 12px',
+    backgroundColor: '#e8f4f8',
+    color: '#4a90e2',
+    borderRadius: '12px',
+    fontSize: '12px',
+    fontWeight: '600'
+  }}>
+    {post.category}
+  </span>
+</div>
                         <p style={{ color: '#666', fontSize: '14px', margin: '8px 0' }}>
                           {post.content.substring(0, 100)}...
                         </p>

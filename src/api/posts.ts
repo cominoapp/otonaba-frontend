@@ -35,7 +35,7 @@ export const getPosts = async (
   page: number = 1, 
   search?: string
 ): Promise<PostsResponse> => {
-  const params: any = { page, limit: 3 };
+  const params: any = { page, limit: 25 };
   if (category) params.category = category;
   if (search) params.search = search;
   
