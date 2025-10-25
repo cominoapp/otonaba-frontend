@@ -7,6 +7,8 @@ export interface User {
   email: string;
   nickname: string;
   age_group: string;
+  gender: string;
+  region: string;
   trust_score: number;
   created_at: string;
 }
@@ -20,13 +22,17 @@ export const register = async (
   email: string,
   password: string,
   nickname: string,
-  age_group: string
+  age_group: string,
+  gender: string,
+  region: string
 ): Promise<AuthResponse> => {
   const response = await axios.post(`${API_URL}/auth/register`, {
     email,
     password,
     nickname,
-    age_group
+    age_group,
+    gender,
+    region
   });
   return response.data;
 };
@@ -57,4 +63,20 @@ export const changePassword = async (
     { currentPassword, newPassword },
     { headers: { Authorization: `Bearer ${token}` } }
   );
+};
+
+// プロフィール更新
+export const updateProfile = async (
+  nickname: string,
+  age_group: string,
+  gender: string,
+  region: string,
+  token: string
+): Promise<User> => {
+  const response = await axios.put(
+    `${API_URL}/auth/profile`,
+    { nickname, age_group, gender, region },
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+  return response.data.user;
 };

@@ -6,6 +6,8 @@ interface User {
   email: string;
   nickname: string;
   age_group: string;
+  gender: string;
+  region: string;
   trust_score: number;
 }
 
