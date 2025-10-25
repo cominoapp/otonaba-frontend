@@ -16,7 +16,9 @@ const Posts: React.FC = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  const categories = ['一般', '趣味', '健康', '旅行', '料理'];
+  const categories = ['一般', '趣味', '健康', '旅行', 'グルメ',
+  '日常', '雑談', '悩み', '自己紹介', '友達募集',
+  'ペット', 'お金', '地元交流', '人生相談', '愚痴'];
 
   useEffect(() => {
     loadPosts();
