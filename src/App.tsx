@@ -1,5 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth, AuthProvider } from './context/AuthContext';
+// 👈 HelmetProvider import 추가
+import { HelmetProvider } from 'react-helmet-async'; 
+
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
@@ -39,29 +42,32 @@ function PrivateRoute({ children }: { children: React.ReactNode }) {
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          {/* Public Routes - 誰でもアクセス可能 */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/posts" element={<Posts />} />
-          <Route path="/posts/:id" element={<PostDetail />} />
-          <Route path="/users/:nickname" element={<UserProfilePage />} />
+    // ✨ HelmetProvider로 전체 애플리케이션을 감쌉니다.
+    <HelmetProvider> 
+      <AuthProvider>
+        <Router>
+          <Routes>
+            {/* Public Routes - 誰でもアクセス可能 */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/posts" element={<Posts />} />
+            <Route path="/posts/:id" element={<PostDetail />} />
+            <Route path="/users/:nickname" element={<UserProfilePage />} />
 
-          {/* Private Routes - ログイン必須 */}
-          <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
-          <Route path="/posts/write" element={<PrivateRoute><PostWrite /></PrivateRoute>} />
-          <Route path="/posts/:id/edit" element={<PrivateRoute><PostWrite /></PrivateRoute>} />
-          <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
-          <Route path="/messages/:id" element={<PrivateRoute><MessageDetailPage /></PrivateRoute>} />
-          <Route path="/send-message" element={<PrivateRoute><SendMessage /></PrivateRoute>} />
+            {/* Private Routes - ログイン必須 */}
+            <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
+            <Route path="/posts/write" element={<PrivateRoute><PostWrite /></PrivateRoute>} />
+            <Route path="/posts/:id/edit" element={<PrivateRoute><PostWrite /></PrivateRoute>} />
+            <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+            <Route path="/messages/:id" element={<PrivateRoute><MessageDetailPage /></PrivateRoute>} />
+            <Route path="/send-message" element={<PrivateRoute><SendMessage /></PrivateRoute>} />
 
-          {/* 404 Redirect */}
-          <Route path="*" element={<Navigate to="/posts" replace />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
+            {/* 404 Redirect */}
+            <Route path="*" element={<Navigate to="/posts" replace />} />
+          </Routes>
+        </Router>
+      </AuthProvider>
+    </HelmetProvider>
   );
 }
 

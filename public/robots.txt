@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /profile/edit
+Disallow: /posts/write
+Disallow: /posts/*/edit
+
+Sitemap: https://otonaba.vercel.app/sitemap.xml

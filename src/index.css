@@ -102,3 +102,13 @@ button,
   justify-content: center;
   white-space: nowrap;
 }
+
+/* 画像の遅延読み込み */
+img {
+  loading: lazy;
+}
+
+/* フォント最適化 */
+@font-face {
+  font-display: swap;
+}
