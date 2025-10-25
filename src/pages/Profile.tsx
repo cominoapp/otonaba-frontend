@@ -246,43 +246,40 @@ const loadMyPosts = async () => {
           {activeTab === 'info' && (
             <div>
               {!isEditing ? (
-                <div>
-                  <div style={{ marginBottom: '30px' }}>
-                    <div style={{ marginBottom: '15px' }}>
-                      <div style={{ color: '#666', fontSize: '14px', marginBottom: '5px' }}>メールアドレス:</div>
-                      <div style={{ fontSize: '16px' }}>{user.email}</div>
-                    </div>
-                    <div style={{ marginBottom: '15px' }}>
-                      <div style={{ color: '#666', fontSize: '14px', marginBottom: '5px' }}>ニックネーム:</div>
-                      <div style={{ fontSize: '16px' }}>{user.nickname}</div>
-                    </div>
-                    <div style={{ marginBottom: '15px' }}>
-                      <div style={{ color: '#666', fontSize: '14px', marginBottom: '5px' }}>年齢層:</div>
-                      <div style={{ fontSize: '16px' }}>{user.age_group}</div>
-                    </div>
-                    <div style={{ marginBottom: '15px' }}>
-                      <div style={{ color: '#666', fontSize: '14px', marginBottom: '5px' }}>性別:</div>
-                      <div style={{ fontSize: '16px' }}>{user.gender || '未設定'}</div>
-                    </div>
-                    <div style={{ marginBottom: '15px' }}>
-                      <div style={{ color: '#666', fontSize: '14px', marginBottom: '5px' }}>地域:</div>
-                      <div style={{ fontSize: '16px' }}>{user.region || '未設定'}</div>
-                    </div>
-                    <div style={{ marginBottom: '15px' }}>
-                      <div style={{ color: '#666', fontSize: '14px', marginBottom: '5px' }}>信頼スコア:</div>
-                      <div style={{ fontSize: '16px' }}>{user.trust_score}点</div>
-                    </div>
-                  </div>
+  <div>
+    <div style={{ marginBottom: '30px' }}>
+      <div style={{ marginBottom: '15px' }}>
+        <div style={{ color: '#666', fontSize: '14px', marginBottom: '5px' }}>メールアドレス:</div>
+        <div style={{ fontSize: '16px' }}>{user.email}</div>
+      </div>
+      <div style={{ marginBottom: '15px' }}>
+        <div style={{ color: '#666', fontSize: '14px', marginBottom: '5px' }}>ニックネーム:</div>
+        <div style={{ fontSize: '16px' }}>{user.nickname}</div>
+      </div>
+      <div style={{ marginBottom: '15px' }}>
+        <div style={{ color: '#666', fontSize: '14px', marginBottom: '5px' }}>年齢層:</div>
+        <div style={{ fontSize: '16px' }}>{user.age_group}</div>
+      </div>
+      <div style={{ marginBottom: '15px' }}>
+        <div style={{ color: '#666', fontSize: '14px', marginBottom: '5px' }}>性別:</div>
+        <div style={{ fontSize: '16px' }}>{user.gender || '未設定'}</div>
+      </div>
+      <div style={{ marginBottom: '15px' }}>
+        <div style={{ color: '#666', fontSize: '14px', marginBottom: '5px' }}>地域:</div>
+        <div style={{ fontSize: '16px' }}>{user.region || '未設定'}</div>
+      </div>
+      {/* 信頼スコア 삭제됨 */}
+    </div>
 
-                  <button
-                    onClick={() => setIsEditing(true)}
-                    className="btn-primary"
-                    style={{ width: 'auto', padding: '12px 32px', marginBottom: '30px' }}
-                  >
-                    プロフィールを編集
-                  </button>
-                </div>
-              ) : (
+    <button
+      onClick={() => setIsEditing(true)}
+      className="btn-primary"
+      style={{ width: 'auto', padding: '12px 32px', marginBottom: '30px' }}
+    >
+      プロフィールを編集
+    </button>
+  </div>
+) : (
                 <form onSubmit={handleProfileUpdate} style={{ marginBottom: '30px' }}>
                   <div className="input-group">
                     <label className="input-label">ニックネーム</label>
