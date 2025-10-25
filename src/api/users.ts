@@ -7,6 +7,8 @@ export interface UserProfile {
   email: string;
   nickname: string;
   age_group: string;
+  gender: string;          // ← 추가
+  region: string;          // ← 추가
   trust_score: number;
   created_at: string;
 }
@@ -44,4 +46,20 @@ export const changePassword = async (
     { currentPassword, newPassword },
     { headers: { Authorization: `Bearer ${token}` } }
   );
+};
+
+// 프로필 업데이트
+export const updateProfile = async (
+  nickname: string,
+  age_group: string,
+  gender: string,
+  region: string,
+  token: string
+): Promise<UserProfile> => {
+  const response = await axios.put(
+    `${API_URL}/auth/profile`,
+    { nickname, age_group, gender, region },
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+  return response.data.user;
 };

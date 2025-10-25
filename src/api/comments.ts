@@ -11,6 +11,8 @@ export interface Comment {
   updated_at: string;
   author_nickname: string;
   author_age_group: string;
+  author_gender: string;      // ← 추가
+  author_region: string;       // ← 추가
 }
 
 // 댓글 목록 조회

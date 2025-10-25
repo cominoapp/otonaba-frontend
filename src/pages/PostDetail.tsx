@@ -168,20 +168,20 @@ const PostDetail: React.FC = () => {
       <div className="home-header">
         <h1 className="home-logo">オトナバ</h1>
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-  <Link to="/" style={{ color: '#4a90e2', textDecoration: 'none', fontWeight: '600' }}>
-    ホーム
-  </Link>
-  <Link to="/posts" style={{ color: '#4a90e2', textDecoration: 'none', fontWeight: '600' }}>
-    掲示板
-  </Link>
-  <Link to="/profile" style={{ color: '#4a90e2', textDecoration: 'none', fontWeight: '600' }}>
-    プロフィール
-  </Link>
-  <NotificationBell />
-  <button onClick={() => { logout(); navigate('/login'); }} className="btn-logout">
-    ログアウト
-  </button>
-</div>
+          <Link to="/" style={{ color: '#4a90e2', textDecoration: 'none', fontWeight: '600' }}>
+            ホーム
+          </Link>
+          <Link to="/posts" style={{ color: '#4a90e2', textDecoration: 'none', fontWeight: '600' }}>
+            掲示板
+          </Link>
+          <Link to="/profile" style={{ color: '#4a90e2', textDecoration: 'none', fontWeight: '600' }}>
+            プロフィール
+          </Link>
+          <NotificationBell />
+          <button onClick={() => { logout(); navigate('/login'); }} className="btn-logout">
+            ログアウト
+          </button>
+        </div>
       </div>
 
       <div className="home-content">
@@ -198,7 +198,7 @@ const PostDetail: React.FC = () => {
               <h1 style={{ fontSize: '28px', fontWeight: 'bold', marginBottom: '12px' }}>{post.title}</h1>
               <div style={{ display: 'flex', gap: '16px', fontSize: '14px', color: '#666', flexWrap: 'wrap' }}>
                 <span>
-                  👤 
+                  {post.author_gender === '男性' ? '👨' : post.author_gender === '女性' ? '👩' : '👤'}{' '}
                   <Link 
                     to={`/users/${post.author_nickname}`}
                     style={{ 
@@ -209,7 +209,9 @@ const PostDetail: React.FC = () => {
                   >
                     {post.author_nickname}
                   </Link>
-                  {' '}({post.author_age_group})
+                  {' '}({post.author_age_group}
+                  {post.author_gender && `・${post.author_gender}`}
+                  {post.author_region && `・${post.author_region}`})
                 </span>
                 <span>📁 {post.category}</span>
                 <span>👁 {post.views}</span>
@@ -250,47 +252,47 @@ const PostDetail: React.FC = () => {
             )}
           </div>
 
-         <div style={{
-  padding: '24px 0',
-  borderTop: '1px solid #e0e0e0',
-  borderBottom: '1px solid #e0e0e0',
-  lineHeight: '1.8',
-  fontSize: '16px',
-  whiteSpace: 'pre-wrap'
-}}>
-  {post.content}
-</div>
+          <div style={{
+            padding: '24px 0',
+            borderTop: '1px solid #e0e0e0',
+            borderBottom: '1px solid #e0e0e0',
+            lineHeight: '1.8',
+            fontSize: '16px',
+            whiteSpace: 'pre-wrap'
+          }}>
+            {post.content}
+          </div>
 
-{/* 이미지 표시 */}
-{post.images && post.images.length > 0 && (
-  <div style={{ padding: '24px 0' }}>
-    <div style={{
-      display: 'grid',
-      gridTemplateColumns: post.images.length === 1 ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
-      gap: '16px'
-    }}>
-      {post.images.map((image: any, index: number) => (
-        <div key={index} style={{ position: 'relative', overflow: 'hidden', borderRadius: '8px' }}>
-          <img
-            src={image.image_url}
-            alt={`post-image-${index}`}
-            style={{
-              width: '100%',
-              height: 'auto',
-              maxHeight: '500px',
-              objectFit: 'cover',
-              cursor: 'pointer',
-              transition: 'transform 0.3s'
-            }}
-            onClick={() => window.open(image.image_url, '_blank')}
-            onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.02)')}
-            onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-          />
-        </div>
-      ))}
-    </div>
-  </div>
-)}
+          {/* 이미지 표시 */}
+          {post.images && post.images.length > 0 && (
+            <div style={{ padding: '24px 0' }}>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: post.images.length === 1 ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
+                gap: '16px'
+              }}>
+                {post.images.map((image: any, index: number) => (
+                  <div key={index} style={{ position: 'relative', overflow: 'hidden', borderRadius: '8px' }}>
+                    <img
+                      src={image.image_url}
+                      alt={`post-image-${index}`}
+                      style={{
+                        width: '100%',
+                        height: 'auto',
+                        maxHeight: '500px',
+                        objectFit: 'cover',
+                        cursor: 'pointer',
+                        transition: 'transform 0.3s'
+                      }}
+                      onClick={() => window.open(image.image_url, '_blank')}
+                      onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.02)')}
+                      onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* 좋아요 버튼 */}
           <div style={{ paddingTop: '20px', textAlign: 'center' }}>
@@ -366,6 +368,7 @@ const PostDetail: React.FC = () => {
                   }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '8px' }}>
                       <div style={{ fontSize: '14px', color: '#666' }}>
+                        {comment.author_gender === '男性' ? '👨' : comment.author_gender === '女性' ? '👩' : '👤'}{' '}
                         <Link 
                           to={`/users/${comment.author_nickname}`}
                           style={{ 
@@ -376,7 +379,9 @@ const PostDetail: React.FC = () => {
                         >
                           {comment.author_nickname}
                         </Link>
-                        {' '}({comment.author_age_group})
+                        {' '}({comment.author_age_group}
+                        {comment.author_gender && `・${comment.author_gender}`}
+                        {comment.author_region && `・${comment.author_region}`})
                         <span style={{ marginLeft: '12px', color: '#999' }}>
                           {formatDate(comment.created_at)}
                         </span>

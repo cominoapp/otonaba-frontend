@@ -104,6 +104,7 @@ const UserProfilePage: React.FC = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '30px' }}>
             <div>
               <h2 style={{ fontSize: '28px', fontWeight: 'bold', marginBottom: '12px' }}>
+                {profile.gender === '男性' ? '👨' : profile.gender === '女性' ? '👩' : '👤'}{' '}
                 {profile.nickname}
               </h2>
               <div className="user-info">
@@ -112,8 +113,12 @@ const UserProfilePage: React.FC = () => {
                   <span className="info-value">{profile.age_group}</span>
                 </div>
                 <div className="info-item">
-                  <span className="info-label">信頼スコア:</span>
-                  <span className="info-value">{profile.trust_score}点</span>
+                  <span className="info-label">性別:</span>
+                  <span className="info-value">{profile.gender || '未設定'}</span>
+                </div>
+                <div className="info-item">
+                  <span className="info-label">地域:</span>
+                  <span className="info-value">{profile.region || '未設定'}</span>
                 </div>
                 <div className="info-item">
                   <span className="info-label">登録日:</span>
