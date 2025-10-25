@@ -271,89 +271,129 @@ const Posts: React.FC = () => {
           </div>
 
           {/* 投稿リスト */}
-          {loading ? (
-            <div style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
-              読み込み中...
+{loading ? (
+  <div style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
+    読み込み中...
+  </div>
+) : posts.length === 0 ? (
+  <div style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
+    投稿がありません
+  </div>
+) : (
+  <>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+      {posts.map(post => (
+        <Link
+          key={post.id}
+          to={`/posts/${post.id}`}
+          style={{ textDecoration: 'none', color: 'inherit' }}
+        >
+          <div style={{
+            padding: '16px',
+            border: '1px solid #e0e0e0',
+            borderRadius: '8px',
+            backgroundColor: 'white',
+            cursor: 'pointer',
+            transition: 'all 0.2s'
+          }}
+          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#f9f9f9'}
+          onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'white'}
+          >
+            {/* カテゴリー */}
+            <div style={{ marginBottom: '8px' }}>
+              <span style={{
+                padding: '4px 12px',
+                backgroundColor: '#e8f4f8',
+                color: '#4a90e2',
+                borderRadius: '12px',
+                fontSize: '12px',
+                fontWeight: '600',
+                whiteSpace: 'nowrap',
+                display: 'inline-block'
+              }}>
+                {post.category}
+              </span>
             </div>
-          ) : posts.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
-              投稿がありません
+
+            {/* タイトル */}
+            <h3 style={{ 
+              fontSize: '18px', 
+              fontWeight: 'bold', 
+              margin: '0 0 8px 0', 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '8px',
+              wordBreak: 'break-word'
+            }}>
+              {post.title}
+              {post.images && post.images.length > 0 && (
+                <span style={{ fontSize: '16px', flexShrink: 0 }}>📷</span>
+              )}
+            </h3>
+            
+            {/* 本文の一部 */}
+            <p style={{ 
+              color: '#666', 
+              fontSize: '14px', 
+              margin: '0 0 12px 0', 
+              lineHeight: '1.5', 
+              wordBreak: 'break-word' 
+            }}>
+              {post.content.substring(0, 100)}...
+            </p>
+            
+            {/* ユーザー情報 */}
+            <div style={{ 
+              fontSize: '13px', 
+              color: '#999', 
+              marginBottom: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: '4px'
+            }}>
+              <span>{post.author_gender === '男性' ? '👨' : post.author_gender === '女性' ? '👩' : '👤'}</span>
+              <Link 
+                to={`/users/${post.author_nickname}`}
+                onClick={(e) => e.stopPropagation()}
+                style={{ 
+                  color: post.author_gender === '女性' ? '#FF3399' : '#4a90e2',
+                  textDecoration: 'none',
+                  fontWeight: '600',
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                {post.author_nickname}
+              </Link>
+              <span style={{ whiteSpace: 'nowrap' }}>
+                ({post.author_age_group}
+                {post.author_gender && `・${post.author_gender}`}
+                {post.author_region && `・${post.author_region}`})
+              </span>
             </div>
-          ) : (
-            <>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                {posts.map(post => (
-                  <Link
-                    key={post.id}
-                    to={`/posts/${post.id}`}
-                    style={{ textDecoration: 'none', color: 'inherit' }}
-                  >
-                    <div style={{
-                      padding: '16px',
-                      border: '1px solid #e0e0e0',
-                      borderRadius: '8px',
-                      backgroundColor: 'white',
-                      cursor: 'pointer',
-                      transition: 'all 0.2s'
-                    }}
-                    onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#f9f9f9'}
-                    onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'white'}
-                    >
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '8px', gap: '10px', flexWrap: 'wrap' }}>
-                        <h3 style={{ fontSize: '18px', fontWeight: 'bold', margin: 0, display: 'flex', alignItems: 'center', gap: '8px', flex: 1, minWidth: '0' }}>
-                          <span style={{ wordBreak: 'break-word' }}>{post.title}</span>
-                          {post.images && post.images.length > 0 && (
-                            <span style={{ fontSize: '16px', flexShrink: 0 }}>📷</span>
-                          )}
-                        </h3>
-                        <span style={{
-                          padding: '4px 12px',
-                          backgroundColor: '#e8f4f8',
-                          color: '#4a90e2',
-                          borderRadius: '12px',
-                          fontSize: '12px',
-                          fontWeight: '600',
-                          whiteSpace: 'nowrap',
-                          flexShrink: 0
-                        }}>
-                          {post.category}
-                        </span>
-                      </div>
-                      
-                      <p style={{ color: '#666', fontSize: '14px', margin: '8px 0', lineHeight: '1.5', wordBreak: 'break-word' }}>
-                        {post.content.substring(0, 100)}...
-                      </p>
-                      
-                      <div style={{ display: 'flex', gap: '8px', fontSize: '13px', color: '#999', marginTop: '12px', flexWrap: 'wrap' }}>
-                        <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <span>{post.author_gender === '男性' ? '👨' : post.author_gender === '女性' ? '👩' : '👤'}</span>
-                          <Link 
-                            to={`/users/${post.author_nickname}`}
-                            onClick={(e) => e.stopPropagation()}
-                            style={{ 
-                              color: post.author_gender === '女性' ? '#FF3399' : '#4a90e2',
-                              textDecoration: 'none',
-                              fontWeight: '600',
-                              whiteSpace: 'nowrap'
-                            }}
-                          >
-                            {post.author_nickname}
-                          </Link>
-                          <span style={{ whiteSpace: 'nowrap' }}>
-                            ({post.author_age_group}
-                            {post.author_gender && `・${post.author_gender}`}
-                            {post.author_region && `・${post.author_region}`})
-                          </span>
-                        </span>
-                        <span style={{ whiteSpace: 'nowrap' }}>💬 {post.comment_count || 0}</span>
-                        <span style={{ whiteSpace: 'nowrap' }}>❤️ {post.like_count || 0}</span>
-                        <span style={{ whiteSpace: 'nowrap' }}>👁 {post.views}</span>
-                        <span style={{ whiteSpace: 'nowrap' }}>📅 {formatDate(post.created_at)}</span>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
+
+            {/* 統計情報 */}
+            <div style={{ 
+              display: 'flex', 
+              gap: '12px', 
+              fontSize: '13px', 
+              color: '#999',
+              flexWrap: 'wrap',
+              marginBottom: '8px'
+            }}>
+              <span style={{ whiteSpace: 'nowrap' }}>💬 {post.comment_count || 0}</span>
+              <span style={{ whiteSpace: 'nowrap' }}>❤️ {post.like_count || 0}</span>
+              <span style={{ whiteSpace: 'nowrap' }}>👁 {post.views}</span>
+            </div>
+
+            {/* 投稿日時 */}
+            <div style={{ fontSize: '13px', color: '#999' }}>
+              <span style={{ whiteSpace: 'nowrap' }}>📅 {formatDate(post.created_at)}</span>
+            </div>
+          </div>
+        </Link>
+      ))}
+    </div>
 
               {/* ページネーション */}
               {totalPages > 1 && (
