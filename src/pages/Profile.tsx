@@ -61,11 +61,10 @@ const Profile: React.FC = () => {
     }
   }, [activeTab]);
 
-  const loadMyPosts = async () => {
+const loadMyPosts = async () => {
   try {
-    const token = localStorage.getItem('token');
-    if (!token || !user) return;
-    const data = await getPosts(); // 전체 게시글 가져오기
+    if (!user) return;
+    const data = await getPosts();
     // 내 게시글만 필터링
     const myPosts = data.filter(post => post.author_id === user.id);
     setPosts(myPosts);
