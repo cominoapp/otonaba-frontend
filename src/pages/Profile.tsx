@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { changePassword, updateProfile } from '../api/auth';
-import { getMyPosts } from '../api/posts';
+import { getPosts } from '../api/posts';
 import { getInbox, getSentMessages } from '../api/messages';
 import type { Post } from '../api/posts';
 import type { Message } from '../api/messages';
@@ -62,15 +62,17 @@ const Profile: React.FC = () => {
   }, [activeTab]);
 
   const loadMyPosts = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      if (!token) return;
-      const data = await getMyPosts(token);
-      setPosts(data);
-    } catch (error) {
-      console.error('投稿の読み込みに失敗しました:', error);
-    }
-  };
+  try {
+    const token = localStorage.getItem('token');
+    if (!token || !user) return;
+    const data = await getPosts(); // 전체 게시글 가져오기
+    // 내 게시글만 필터링
+    const myPosts = data.filter(post => post.author_id === user.id);
+    setPosts(myPosts);
+  } catch (error) {
+    console.error('投稿の読み込みに失敗しました:', error);
+  }
+};
 
   const loadMessages = async () => {
     try {

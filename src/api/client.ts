@@ -35,12 +35,14 @@ apiClient.interceptors.response.use(
 );
 
 export const register = async (userData: {
-  email: string;
-  password: string;
-  nickname: string;
+  email: string; 
+  password: string; 
+  nickname: string; 
   age_group: string;
+  gender: string;
+  region: string;
 }) => {
-  const response = await apiClient.post('/auth/register', userData);
+  const response = await axios.post(`${API_BASE_URL}/auth/register`, data);
   return response.data;
 };
 

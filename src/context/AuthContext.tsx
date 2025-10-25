@@ -16,7 +16,7 @@ interface AuthContextType {
   token: string | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, nickname: string, age_group: string) => Promise<void>;
+  register: (email: string, password: string, nickname: string, age_group: string, gender: string, region: string) => Promise<void>;
   logout: () => void;
   isAuthenticated: boolean;
 }
@@ -62,22 +62,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }
 };
 
-  const register = async (email: string, password: string, nickname: string, age_group: string) => {
-    try {
-      const response = await registerApi({ email, password, nickname, age_group });
-      
-      if (response.success) {
-        setToken(response.token);
-        setUser(response.user);
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('user', JSON.stringify(response.user));
-      } else {
-        throw new Error(response.message || '会員登録に失敗しました');
-      }
-    } catch (error: any) {
-      throw new Error(error.response?.data?.message || '会員登録に失敗しました');
+  const register = async (email: string, password: string, nickname: string, age_group: string, gender: string, region: string) => {
+  try {
+    const response = await registerApi({ email, password, nickname, age_group, gender, region });
+    
+    if (response.success) {
+      setToken(response.token);
+      setUser(response.user);
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('user', JSON.stringify(response.user));
+    } else {
+      throw new Error(response.message || '会員登録に失敗しました');
     }
-  };
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || '会員登録に失敗しました');
+  }
+};
 
   const logout = () => {
     setUser(null);
