@@ -65,7 +65,6 @@ const loadMyPosts = async () => {
   try {
     if (!user) return;
     const data = await getPosts();
-    // 내 게시글만 필터링
     const myPosts = data.filter(post => post.author_id === user.id);
     setPosts(myPosts);
   } catch (error) {

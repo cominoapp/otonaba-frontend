@@ -34,7 +34,7 @@ apiClient.interceptors.response.use(
   }
 );
 
-export const register = async (userData: {
+export const register = async (data: { 
   email: string; 
   password: string; 
   nickname: string; 
