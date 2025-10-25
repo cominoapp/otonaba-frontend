@@ -13,6 +13,8 @@ export interface Post {
   updated_at: string;
   author_nickname: string;
   author_age_group: string;
+  author_gender: string;  
+  author_region: string;  
   comment_count?: number;
   like_count?: number;
   images?: Array<{ id: number; image_url: string; cloudinary_id: string }>;

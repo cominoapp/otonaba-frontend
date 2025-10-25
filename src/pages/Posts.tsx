@@ -285,20 +285,22 @@ const Posts: React.FC = () => {
                       
                       <div style={{ display: 'flex', gap: '16px', fontSize: '13px', color: '#999', marginTop: '12px' }}>
                         <span>
-                          👤 
-                          <Link 
-                            to={`/users/${post.author_nickname}`}
-                            onClick={(e) => e.stopPropagation()}
-                            style={{ 
-                              color: '#4a90e2', 
-                              textDecoration: 'none',
-                              fontWeight: '600'
-                            }}
-                          >
-                            {post.author_nickname}
-                          </Link>
-                          {' '}({post.author_age_group})
-                        </span>
+  {post.author_gender === '男性' ? '♂' : post.author_gender === '女性' ? '♀' : '👤'}{' '}
+  <Link 
+    to={`/users/${post.author_nickname}`}
+    onClick={(e) => e.stopPropagation()}
+    style={{ 
+      color: '#4a90e2', 
+      textDecoration: 'none',
+      fontWeight: '600'
+    }}
+  >
+    {post.author_nickname}
+  </Link>
+  {' '}({post.author_age_group}
+  {post.author_gender && `・${post.author_gender}`}
+  {post.author_region && `・${post.author_region}`})
+</span>
                         <span>💬 {post.comment_count || 0}</span>
                         <span>❤️ {post.like_count || 0}</span>
                         <span>👁 {post.views}</span>
